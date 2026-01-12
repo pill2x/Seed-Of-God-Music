@@ -72,4 +72,18 @@
     .newsletter-signup {
         flex-direction: column;
     }
+
+    .shows-empty-state {
+        padding: 2rem 1.5rem;
+        /* Reduce padding */
+        width: 100%;
+        /* Ensure full width */
+        margin: 0 auto;
+        /* Keep centered */
+    }
+
+    .empty-message {
+        font-size: 1.2rem;
+        /* Slightly smaller text */
+    }
 }
