@@ -28,14 +28,16 @@
 }
 
 html,
-body {
+body,
+#root {
   font-family: var(--font-main);
   background-color: var(--bg-color);
   color: var(--text-main);
   line-height: 1.6;
   overflow-x: hidden;
-  /* Critical for mobile */
   width: 100%;
+  max-width: 100%;
+  /* Force constraint */
   -webkit-font-smoothing: antialiased;
 }
 

@@ -39,12 +39,15 @@
 }
 
 .artist-name {
-    font-size: 6rem;
+    font-size: clamp(2rem, 10vw, 6rem);
+    /* Smaller min for mobile */
     line-height: 0.9;
     margin-bottom: 2.5rem;
     text-transform: uppercase;
     font-family: var(--font-display);
-    /* Match Navbar Logo */
+    padding: 0 1rem;
+    width: 100%;
+    word-wrap: break-word;
 }
 
 .outline-text {
@@ -159,11 +162,8 @@
     }
 
     .artist-name {
-        font-size: 2.5rem;
-        /* Reduced from 3rem to fit narrow screens */
         margin-bottom: 2rem;
-        word-wrap: break-word;
-        /* Prevent overflow */
+        /* clamp handles sizing now */
     }
 
     .btn {

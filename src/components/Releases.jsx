@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import './Releases.css';
 import mummyAdaImg from '../images/Mummy Ada.jpg';
 import mummyAdaImg2 from '../images/Mummy Ada 2.png';
+import mummyAdaImg4 from '../images/Mummy Ada 4.png';
 import iheIMeremAudio from '../audio/Ihe I Mere\'m - Victoria Onyebuchi.mp3';
+import ezeNdeEzeAudio from '../audio/Eze Nde Eze - Victoria Onyebuchi-1.mp3';
 import StreamModal from './StreamModal';
 
 const releases = [
@@ -36,12 +38,12 @@ const releases = [
     },
     {
         id: 3,
-        title: "Grace Abounds",
-        type: "Album",
-        year: "2023",
-        cover: "https://images.unsplash.com/photo-1507838153414-b4b713384ebd?q=80&w=1000&auto=format&fit=crop",
+        title: "Eze Nde Eze",
+        type: "Single",
+        year: "2026",
+        cover: mummyAdaImg4,
         artist: "Evang. Victoria Onyebuchi",
-        audio: null,
+        audio: ezeNdeEzeAudio,
         links: {
             spotify: "#",
             audiomack: "#",
