@@ -150,13 +150,20 @@
     }
 
     .tagline {
-        font-size: 0.9rem;
+        font-size: 0.8rem;
+        /* Smaller tagline */
         letter-spacing: 2px;
+        white-space: normal;
+        /* Allow wrap */
+        padding: 0 1rem;
     }
 
     .artist-name {
-        font-size: 3rem;
+        font-size: 2.5rem;
+        /* Reduced from 3rem to fit narrow screens */
         margin-bottom: 2rem;
+        word-wrap: break-word;
+        /* Prevent overflow */
     }
 
     .btn {

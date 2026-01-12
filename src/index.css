@@ -6,10 +6,12 @@
   --bg-secondary: #0e0e0e;
   --text-main: #f3f3f3;
   --text-muted: #888888;
-  --accent-primary: #e0aa3e; /* Gold */
-  --accent-secondary: #7b2cbf; /* Deep Purple */
+  --accent-primary: #e0aa3e;
+  /* Gold */
+  --accent-secondary: #7b2cbf;
+  /* Deep Purple */
   --accent-glow: rgba(224, 170, 62, 0.3);
-  
+
   /* Fonts */
   --font-main: 'Outfit', sans-serif;
   --font-display: 'Playfair Display', serif;
@@ -25,13 +27,23 @@
   padding: 0;
 }
 
+html,
 body {
   font-family: var(--font-main);
   background-color: var(--bg-color);
   color: var(--text-main);
   line-height: 1.6;
   overflow-x: hidden;
+  /* Critical for mobile */
+  width: 100%;
   -webkit-font-smoothing: antialiased;
+}
+
+/* Ensure no element exceeds viewport width */
+img,
+video,
+iframe {
+  max-width: 100%;
 }
 
 a {
@@ -40,7 +52,12 @@ a {
   transition: all 0.3s ease;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   line-height: 1.2;
   font-weight: 700;
 }
@@ -87,8 +104,15 @@ section {
 
 /* Animations */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .fade-in {
