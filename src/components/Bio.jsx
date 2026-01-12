@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './Bio.css';
-import mummyAdaImg from '../images/Mummy Ada 2.jpg';
+import mummyAdaImg from '../images/Mummy Ada 2.png';
 import adaJesusImg from '../images/Ada Jesus.jpg';
 
 const Bio = () => {

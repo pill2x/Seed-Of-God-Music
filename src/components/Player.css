@@ -192,30 +192,95 @@
 }
 
 @media (max-width: 768px) {
-    .player-volume {
-        display: none;
+    .music-player {
+        padding: 1rem 0;
+        /* More touch space */
+        bottom: 0;
+        backdrop-filter: blur(15px);
+        background: rgba(10, 10, 10, 0.98);
     }
 
     .player-container {
-        padding: 0 1rem;
+        flex-direction: column;
         gap: 1rem;
+        padding: 0 1.5rem;
+    }
+
+    .track-info {
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .player-center {
+        width: 100%;
+        max-width: none;
+        flex: 0;
+    }
+
+    .player-controls {
+        width: 100%;
+        justify-content: space-between;
+        /* Spread countrols */
+        position: absolute;
+        /* Position play button relative to track info? No, simpler */
+        position: static;
+        margin-top: 0.5rem;
+    }
+
+    /* Mobile Layout Strategy: 
+       Row 1: Art + Info
+       Row 2: Controls + Progress
+    */
+
+    .player-container {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        /* Info Left, Play Button Right */
+        align-items: center;
+        gap: 10px;
+        padding-bottom: 30px;
+        /* Space for progress bar */
+        position: relative;
     }
 
     .track-info {
         width: auto;
-        flex: 1;
     }
 
     .player-center {
-        flex: 0;
+        display: contents;
+        /* Flatten structure for grid placement if possible? */
+        /* Actually playing with absolute positioning is easier for the progress bar */
     }
 
-    .player-progress {
-        display: none;
+    .player-controls {
+        gap: 0;
+        justify-content: flex-end;
     }
 
     .player-controls .prev,
     .player-controls .next {
         display: none;
+        /* Keep it simple on mobile, just Play/Pause */
+    }
+
+    .player-progress {
+        display: flex;
+        /* Show progress! */
+        position: absolute;
+        bottom: 5px;
+        left: 20px;
+        right: 20px;
+        width: auto;
+    }
+
+    .time-current,
+    .time-total {
+        font-size: 0.7rem;
+    }
+
+    .player-volume {
+        display: none;
+        /* Hide volume on mobile, hardware buttons usage */
     }
 }

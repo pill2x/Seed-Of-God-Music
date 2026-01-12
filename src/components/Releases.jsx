@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Releases.css';
 import mummyAdaImg from '../images/Mummy Ada.jpg';
-import mummyAdaImg2 from '../images/Mummy Ada 2.jpg';
+import mummyAdaImg2 from '../images/Mummy Ada 2.png';
 import iheIMeremAudio from '../audio/Ihe I Mere\'m - Victoria Onyebuchi.mp3';
 import StreamModal from './StreamModal';
 

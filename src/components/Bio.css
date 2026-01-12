@@ -125,21 +125,56 @@
 }
 
 @media (max-width: 900px) {
+    .bio-container {
+        flex-direction: column;
+        gap: 2rem;
+        margin-bottom: 5rem;
+    }
 
-    .bio-container,
+    .bio-container.reversed {
+        flex-direction: column;
+        /* Keep consistent stacking: Image Top (if DOM order allows) or fix DOM order via flex */
+    }
+
+    /* 
+       DOM Order:
+       Regular: Image, Content
+       Reversed: Content, Image
+       
+       We want Image to be on top for both? Or Content on top?
+       Let's go with Image on top for visual impact.
+    */
+
+    .bio-container {
+        flex-direction: column;
+    }
+
+    /* For the reversed container (Content, Image), we need column-reverse to put Image (2nd child) on top */
     .bio-container.reversed {
         flex-direction: column-reverse;
-        /* Usually image on top is better, but here we want text first? No, image first is std mobile */
-        gap: 3rem;
-        margin-bottom: 5rem;
     }
 
     .artist-name-small {
         font-size: 2rem;
+        text-align: center;
+    }
+
+    .artist-role {
+        text-align: center;
+        display: block;
+    }
+
+    .bio-text {
+        text-align: center;
+        /* Center align text on mobile */
+        padding: 0 1rem;
     }
 
     .image-frame::before {
         display: none;
-        /* Simplify on mobile */
+    }
+
+    .bio-tagline.center {
+        margin-bottom: 3rem;
     }
 }
