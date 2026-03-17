@@ -7,7 +7,7 @@ const StreamModal = ({ isOpen, onClose, links }) => {
     const services = [
         {
             name: 'Spotify',
-            url: links?.spotify || 'https://open.spotify.com/artist/0gtDiMtLlvORzlsF6SRkun',
+            url: links?.spotify || '#',
             color: '#1DB954',
             icon: (
                 <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
@@ -27,7 +27,7 @@ const StreamModal = ({ isOpen, onClose, links }) => {
         },
         {
             name: 'YouTube',
-            url: links?.youtube || 'https://www.youtube.com/@evangvictoriaonyebuchi',
+            url: links?.youtube || '#',
             color: '#FF0000',
             icon: (
                 <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
