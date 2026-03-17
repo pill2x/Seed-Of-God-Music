@@ -18,12 +18,12 @@ const AlbumQueueModal = ({ isOpen, onClose, queueData, onPlayTrack }) => {
 
                 <div className="platform-list track-list">
                     {queueData.tracks.map((track, index) => (
-                        <div key={index} className="track-item" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '10px 0', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '15px', flex: 1 }}>
-                                <span style={{ color: 'var(--text-muted)', fontSize: '0.9rem', width: '20px' }}>{index + 1}</span>
-                                <span style={{ color: '#fff' }}>{track.title}</span>
+                        <div className="track-item" key={index} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 0', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+                            <div className="track-item-title-container">
+                                <span className="track-item-index">{index + 1}</span>
+                                <span className="track-item-title">{track.title}</span>
                             </div>
-                            <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
+                            <div className="track-item-actions">
                                 <button 
                                     onClick={() => {
                                         onPlayTrack({

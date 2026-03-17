@@ -22,8 +22,8 @@ const releases = [
         artist: "Evang. Victoria Onyebuchi",
         audio: [
             { title: "Abiawom", src: abiawomAudio },
-            { title: "Abiawom e kele gi", src: ekeleGiAudio },
-            { title: "Emaramma", src: emarammaAudio }
+            { title: "Emaramma", src: emarammaAudio },
+            { title: "Abiawom e kele gi", src: ekeleGiAudio }
         ],
         isNew: false,
         links: {
