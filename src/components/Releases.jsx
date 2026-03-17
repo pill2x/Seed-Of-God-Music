@@ -5,7 +5,12 @@ import mummyAdaImg2 from '../images/Mummy Ada 2.png';
 import mummyAdaImg4 from '../images/Mummy Ada 4.jpeg';
 import iheIMeremAudio from '../audio/Ihe I Mere\'m - Victoria Onyebuchi.mp3';
 import nmuoAudio from '../audio/Nmuo - Victoria Onyebuchi.mp3';
+import abiawomAudio from '../audio/album/bot/Abiawom - Victoria Onyebuchi.mp3.mp3';
+import ekeleGiAudio from '../audio/album/bot/Abiawom e kele gi - Sis. Victoria Prod. by Dannybitz.mp3.mp3';
+import emarammaAudio from '../audio/album/bot/Emaramma - Sis. Victoria. Prod. by Dannybitz.mp3.mp3';
+
 import StreamModal from './StreamModal';
+import AlbumQueueModal from './AlbumQueueModal';
 
 const releases = [
     {
@@ -15,7 +20,11 @@ const releases = [
         year: "2025",
         cover: mummyAdaImg,
         artist: "Evang. Victoria Onyebuchi",
-        audio: null,
+        audio: [
+            { title: "Abiawom", src: abiawomAudio },
+            { title: "Abiawom e kele gi", src: ekeleGiAudio },
+            { title: "Emaramma", src: emarammaAudio }
+        ],
         isNew: false,
         links: {
             spotify: "https://open.spotify.com/album/09tmma75UVlCE5Z6wAzkw2",
@@ -59,6 +68,8 @@ const releases = [
 const Releases = ({ onPlay }) => {
     const [modalOpen, setModalOpen] = useState(false);
     const [selectedLinks, setSelectedLinks] = useState(null);
+    const [queueOpen, setQueueOpen] = useState(false);
+    const [selectedQueue, setSelectedQueue] = useState(null);
 
     const openModal = (links) => {
         setSelectedLinks(links);
@@ -84,11 +95,20 @@ const Releases = ({ onPlay }) => {
                                     release.isNew && <span className="new-badge">New</span>
                                 )}
                                 <div className="release-overlay">
-                                    {!release.isUpcoming && (
+                                    {!release.isUpcoming && release.audio && (
                                         <button
                                             className="play-btn"
                                             onClick={() => {
-                                                if (release.audio) {
+                                                if (Array.isArray(release.audio)) {
+                                                    // Start playing the first track of the album, maybe pass the whole queue if Player supports it
+                                                    onPlay({
+                                                        title: release.audio[0].title,
+                                                        artist: release.artist,
+                                                        cover: release.cover,
+                                                        src: release.audio[0].src,
+                                                        queue: release.audio.map(track => ({ ...track, cover: release.cover, artist: release.artist }))
+                                                    });
+                                                } else {
                                                     onPlay({
                                                         title: release.title,
                                                         artist: release.artist,
@@ -123,17 +143,38 @@ const Releases = ({ onPlay }) => {
                                             >
                                                 Stream Now
                                             </a>
-                                            {release.audio && (
-                                                <a
-                                                    href={release.audio}
-                                                    download={`${release.title} - ${release.artist}.mp3`}
+                                            {Array.isArray(release.audio) ? (
+                                                <button
                                                     className="download-link"
-                                                    title="Download Audio"
+                                                    title="View Album Tracks (Queue)"
+                                                    style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer' }}
+                                                    onClick={() => {
+                                                        setSelectedQueue({
+                                                            title: release.title,
+                                                            cover: release.cover,
+                                                            artist: release.artist,
+                                                            tracks: release.audio
+                                                        });
+                                                        setQueueOpen(true);
+                                                    }}
                                                 >
                                                     <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-                                                        <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
+                                                        <path d="M15 6H3v2h12V6zm0 4H3v2h12v-2zM3 16h8v-2H3v2zM17 6v8.18c-.31-.11-.65-.18-1-.18-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3V8h3V6h-5z" />
                                                     </svg>
-                                                </a>
+                                                </button>
+                                            ) : (
+                                                release.audio && (
+                                                    <a
+                                                        href={release.audio}
+                                                        download={`${release.title} - ${release.artist}.mp3`}
+                                                        className="download-link"
+                                                        title="Download Audio"
+                                                    >
+                                                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                                                            <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
+                                                        </svg>
+                                                    </a>
+                                                )
                                             )}
                                         </>
                                     )}
@@ -148,6 +189,13 @@ const Releases = ({ onPlay }) => {
                 isOpen={modalOpen}
                 onClose={() => setModalOpen(false)}
                 links={selectedLinks}
+            />
+
+            <AlbumQueueModal
+                isOpen={queueOpen}
+                onClose={() => setQueueOpen(false)}
+                queueData={selectedQueue}
+                onPlayTrack={onPlay}
             />
         </section>
     );

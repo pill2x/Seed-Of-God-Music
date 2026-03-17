@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './Player.css';
 
-const Player = ({ currentTrack, isPlaying, setIsPlaying }) => {
+const Player = ({ currentTrack, isPlaying, setIsPlaying, onTrackChange }) => {
     const [volume, setVolume] = useState(100);
     const [previousVolume, setPreviousVolume] = useState(100);
     const [isMuted, setIsMuted] = useState(false);
@@ -82,6 +82,43 @@ const Player = ({ currentTrack, isPlaying, setIsPlaying }) => {
     }
 
 
+    const handleNext = () => {
+        if (!currentTrack.queue || currentTrack.startIndex === undefined) return;
+        const nextIndex = currentTrack.startIndex + 1;
+        if (nextIndex < currentTrack.queue.length) {
+            const nextTrack = currentTrack.queue[nextIndex];
+            onTrackChange({
+                title: nextTrack.title,
+                artist: currentTrack.artist,
+                cover: currentTrack.cover,
+                src: nextTrack.src,
+                queue: currentTrack.queue,
+                startIndex: nextIndex
+            });
+            setIsPlaying(true);
+        } else {
+            // Queue finished
+            setIsPlaying(false);
+        }
+    };
+
+    const handlePrev = () => {
+        if (!currentTrack.queue || currentTrack.startIndex === undefined) return;
+        const prevIndex = currentTrack.startIndex - 1;
+        if (prevIndex >= 0) {
+            const prevTrack = currentTrack.queue[prevIndex];
+            onTrackChange({
+                title: prevTrack.title,
+                artist: currentTrack.artist,
+                cover: currentTrack.cover,
+                src: prevTrack.src,
+                queue: currentTrack.queue,
+                startIndex: prevIndex
+            });
+            setIsPlaying(true);
+        }
+    };
+
     return (
         <div className="music-player">
             {/* Hidden Audio Element */}
@@ -89,7 +126,7 @@ const Player = ({ currentTrack, isPlaying, setIsPlaying }) => {
                 <audio
                     ref={audioRef}
                     src={currentTrack.src}
-                    onEnded={() => setIsPlaying(false)}
+                    onEnded={currentTrack.queue ? handleNext : () => setIsPlaying(false)}
                     onTimeUpdate={handleTimeUpdate}
                     onLoadedMetadata={handleLoadedMetadata}
                 />
@@ -110,7 +147,12 @@ const Player = ({ currentTrack, isPlaying, setIsPlaying }) => {
 
                 <div className="player-center">
                     <div className="player-controls">
-                        <button className="control-btn prev">
+                        <button 
+                            className="control-btn prev" 
+                            onClick={handlePrev} 
+                            disabled={!currentTrack.queue || currentTrack.startIndex === 0}
+                            style={{ opacity: (!currentTrack.queue || currentTrack.startIndex === 0) ? 0.3 : 1, cursor: (!currentTrack.queue || currentTrack.startIndex === 0) ? 'default' : 'pointer' }}
+                        >
                             <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z" /></svg>
                         </button>
 
@@ -125,7 +167,12 @@ const Player = ({ currentTrack, isPlaying, setIsPlaying }) => {
                             )}
                         </button>
 
-                        <button className="control-btn next">
+                        <button 
+                            className="control-btn next"
+                            onClick={handleNext}
+                            disabled={!currentTrack.queue || currentTrack.startIndex === currentTrack.queue.length - 1}
+                            style={{ opacity: (!currentTrack.queue || currentTrack.startIndex === currentTrack.queue.length - 1) ? 0.3 : 1, cursor: (!currentTrack.queue || currentTrack.startIndex === currentTrack.queue.length - 1) ? 'default' : 'pointer' }}
+                        >
                             <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z" /></svg>
                         </button>
                     </div>

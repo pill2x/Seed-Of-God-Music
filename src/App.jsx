@@ -38,6 +38,7 @@ function App() {
         currentTrack={currentTrack}
         isPlaying={isPlaying}
         setIsPlaying={setIsPlaying}
+        onTrackChange={playTrack}
       />
     </div>
   );
